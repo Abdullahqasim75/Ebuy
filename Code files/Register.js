@@ -27,18 +27,24 @@ register.addEventListener("click", function() {
 })
 
 function storeData() {
-    var name = document.getElementById('fullname');
-    var mail = document.getElementById('email');
-    var number = document.getElementById('number');
-    var pass = document.getElementById('pass');
-    var pass2 = document.getElementById('pass2');
+    let notes = localStorage.getItem("Register");
+  
+    if (notes == null) notesObj = [];
+    else notesObj = JSON.parse(notes);
 
-    if(pass.value === pass2.value) {
-        localStorage.setItem('name', name.value);
-        localStorage.setItem('mail', mail.value);
-        localStorage.setItem('number', number.value);
-        localStorage.setItem('pw1', pass.value);
-        localStorage.setItem('pw', pass2.value);
+    if(document.getElementById("pass").value === document.getElementById("pass2").value) {
+        let RegisterData = {
+            Fname: document.getElementById("fullname").value,
+            mail: document.getElementById("email").value,
+            number: document.getElementById("number").value,
+            pass: document.getElementById("pass").value,
+            pass2: document.getElementById("pass2").value
+        }
+    
+    
+        notesObj.push(RegisterData);
+        localStorage.setItem('Register', JSON.stringify(notesObj));
+
         localStorage.setItem('log', 0);
         alert("Successfully Registered");
     }
