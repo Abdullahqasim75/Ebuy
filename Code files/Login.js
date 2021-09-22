@@ -34,16 +34,30 @@ login.addEventListener("click", function() {
 
 function check() {
 
-    var storedMail = localStorage.getItem('mail');
-    console.log(storedMail.value);
-    var storedPw = localStorage.getItem('pw');
+    if (typeof(Storage) !== "undefined") {
+        if(localStorage.getItem("Register")) {
+            console.log("Data Got");
+            let data = JSON.parse(localStorage.getItem("Register"));
 
-    var userMail = document.getElementById('log-mail').value;
-    var userPw = document.getElementById('log-pass').value;
+            var flag = 0;
 
-    if(userMail !== storedMail || userPw !== storedPw) {
-        return false;
-    }else {
-        return true;
+            var userMail = document.getElementById('log-mail').value;
+            var userPw = document.getElementById('log-pass').value;
+
+            for (i=0;i<Object.keys(data).length;i++){
+
+                if(data[i].mail !== userMail || data[i].pass2 !== userPw){
+                    flag = 0;
+                }else {
+                    flag = 1;
+                    localStorage.setItem("userName", data[i].Fname);
+                    return true;
+                }
+            }
+            if(flag == 0) return false;
+        }
+        else {
+            alert("Browser does not support Web Storage.");
+        }
     }
 }
