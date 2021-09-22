@@ -161,7 +161,9 @@
 		<script>
 			loadUsername();
 			function loadUsername() {
-				document.getElementById('Username').innerHTML = 'Hi' +" "+ localStorage.getItem('userName');
+				if(localStorage.getItem('userName') !== ""){
+					document.getElementById('Username').innerHTML = 'Hi' +" "+ localStorage.getItem('userName');
+				}
 			}
 		</script>
     </body>
