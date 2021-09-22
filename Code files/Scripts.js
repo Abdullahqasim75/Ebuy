@@ -36,5 +36,6 @@ function logOut() {
     log.style.display = 'block';
     regis.style.display = 'block';
     logout.style.display = 'none';
+    document.getElementById('Username').innerHTML = "";
     localStorage.setItem('log', 0);
 }
